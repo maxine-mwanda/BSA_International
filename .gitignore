@@ -1,0 +1,7 @@
+.env
+go.mod
+go.sum
+bin/
+vendor/
+db.sql
+.git

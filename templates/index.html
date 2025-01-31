@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BSA International - Empowering Women</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+        .header p {
+            font-size: 1.2rem;
+            margin: 10px 0 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        .section {
+            margin: 40px 0;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .section h2 {
+            color: #4CAF50;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .section p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #555;
+        }
+        .section img {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            margin: 10px 0;
+        }
+        .cta-button:hover {
+            background-color: #45a049;
+        }
+        .donation-form, .report-form {
+            margin: 20px 0;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .payment-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .payment-buttons button {
+            width: 30%;
+            background-color: #4CAF50;
+        }
+        .payment-buttons button:hover {
+            background-color: #45a049;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        .footer a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>BSA International</h1>
+        <p>Empowering Women, Transforming Communities</p>
+    </div>
+
+    <div class="container">
+        <!-- Mission and Vision Section -->
+        <div class="section">
+            <h2>Our Mission and Vision</h2>
+            <p>
+                At BSA International, our mission is to empower women through education, resources, and opportunities. 
+                We envision a world where every woman has the tools and support to thrive in their personal and professional lives.
+            </p>
+            <img src="https://via.placeholder.com/600x400" alt="Mission and Vision">
+        </div>
+
+        <!-- Success Stories Section -->
+        <div class="section">
+            <h2>Success Stories</h2>
+            <p>
+                Hear from the women whose lives have been transformed through our programs. From starting their own businesses 
+                to breaking barriers in their communities, these stories inspire us every day.
+            </p>
+            <img src="https://via.placeholder.com/600x400" alt="Success Stories">
+            <a href="#" class="cta-button">Read More Stories</a>
+        </div>
+
+        <!-- Donation Impact Section -->
+        <div class="section">
+            <h2>Your Donation Makes a Difference</h2>
+            <p>
+                Every dollar you donate helps us provide training, resources, and support to women in need. 
+                Together, we can create a brighter future for women around the world.
+            </p>
+            <img src="https://via.placeholder.com/600x400" alt="Donation Impact">
+            <a href="#donate" class="cta-button">Donate Now</a>
+        </div>
+
+        <!-- Donation Form Section -->
+        <div class="section" id="donate">
+            <h2>Make a Donation</h2>
+            <form id="donationForm" action="/donate" method="POST">
+                <input type="number" name="amount" min="1" step="0.01" placeholder="Amount ($)" required>
+                <input type="hidden" name="payment_method" id="paymentMethod" value="">
+                <div class="payment-buttons">
+                    <button type="button" onclick="setPaymentMethod('Visa')">Visa</button>
+                    <button type="button" onclick="setPaymentMethod('PayPal')">PayPal</button>
+                    <button type="button" onclick="setPaymentMethod('MPesa')">M-Pesa</button>
+                </div>
+                <button type="submit">Donate</button>
+            </form>
+        </div>
+
+        <!-- Report Incident Section -->
+        <div class="section">
+            <h2>Report an Incident</h2>
+            <p>
+                If you have experienced or witnessed an incident of sexual harassment in the workplace, 
+                you can report it anonymously here. Your voice matters.
+            </p>
+            <form action="/report" method="POST">
+                <textarea name="incident_description" placeholder="Describe the incident..." required></textarea>
+                <button type="submit">Submit Report</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2023 BSA International. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Contact Us</a></p>
+    </div>
+
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID"></script>
+    <script>
+        function setPaymentMethod(method) {
+            const amount = document.querySelector('input[name="amount"]').value;
+            if (amount < 1) {
+                alert("Minimum donation amount is $1");
+                return;
+            }
+
+            if (method === "PayPal") {
+                paypal.Buttons({
+                    createOrder: function(data, actions) {
+                        return actions.order.create({
+                            purchase_units: [{
+                                amount: {
+                                    value: amount
+                                }
+                            }]
+                        });
+                    },
+                    onApprove: function(data, actions) {
+                        return actions.order.capture().then(function(details) {
+                            alert("Payment completed by " + details.payer.name.given_name);
+                            document.getElementById('paymentMethod').value = "PayPal";
+                            document.getElementById('donationForm').submit();
+                        });
+                    }
+                }).render('#paypal-button-container');
+            } else {
+                document.getElementById('paymentMethod').value = method;
+                document.getElementById('donationForm').submit();
+            }
+        }
+    </script>
+</body>
+</html>
