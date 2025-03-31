@@ -3,85 +3,796 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BSA - Beautiful, Strong, Amazing</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Beautiful, Strong, Amazing </title>
+    <style>
+        :root {
+            --primary-color: #e94dad;
+            --secondary-color: #7c3aed;
+            --dark-color: #333;
+            --light-color: #f9f9f9;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--dark-color);
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-image {
+            height: 100px;
+            margin-right: 15px;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 25px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background-color: #d43c97;
+        }
+        
+        .btn-outline {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            background: transparent;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/img/stylish\ business\ attire.webp') center/cover;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* About Section */
+        .about {
+            padding: 80px 0;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--secondary-color);
+        }
+        
+        /* Programs Section */
+        .programs {
+            background-color: var(--light-color);
+            padding: 80px 0;
+        }
+        
+        .programs-intro {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .program-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .program-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .program-img {
+            height: 200px;
+            width: 100%;
+            background-color: #ddd;
+        }
+        
+        .program-content {
+            padding: 20px;
+        }
+        
+        .program-content h3 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        /* Impact Section */
+        .impact {
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+        
+        .stat-box {
+            margin: 20px;
+            min-width: 200px;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        /* Stories Section */
+        .stories {
+            background-color: var(--light-color);
+            padding: 80px 0;
+        }
+        
+        .stories-intro {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .story-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .story-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .story-quote {
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .story-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #ddd;
+            margin-right: 15px;
+        }
+        
+        /* Get Involved Section */
+        .get-involved {
+            padding: 80px 0;
+        }
+        
+        .get-involved-intro {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .involvement-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .involvement-card {
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .involvement-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .involvement-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        /* Donation Section */
+        .donate {
+            background: linear-gradient(var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .donate h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .donate p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+        }
+        
+        .donation-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .donation-amount {
+            padding: 10px 30px;
+            border: 2px solid white;
+            background: transparent;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .donation-amount:hover, .donation-amount.active {
+            background: white;
+            color: var(--primary-color);
+        }
+        
+        .donation-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            text-decoration: none;
+            color: #ccc;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            height: 40px;
+            width: 40px;
+            background-color: #444;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Mobile Nav */
+        .mobile-nav-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-color);
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-nav-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: right 0.3s;
+                box-shadow: -5px 0 10px rgba(0,0,0,0.1);
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: left;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .logo-container {
+                max-width: 100%;
+            }
+            
+            .logo-image {
+                height: 200px;
+            }
+            
+            .logo-text {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <div class="logo">
-            <img src="../img/BSA_logo.jpg" alt="BSA Logo">
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#career-growth">Career Growth</a></li>
-                <li><a href="#success-stories">Success Stories</a></li>
-                <li><a href="#merchandise">Merchandise</a></li>
-                <li><a href="#events">Workshops & Events</a></li>
-                <li><a href="#sexual-harassment">Sexual Harassment</a></li>
-                <li><a href="#donate">Donate</a></li>
-                <li><a href="#report-incident">Report Incident</a></li>
+        <div class="container nav-container">
+            <div class="logo-container">
+                <img src="/img/B S A.png" alt="Women's Empowerment Fund Logo" class="logo-image">
+                <div class="logo-text">Beautiful, Strong, Amazing</div>
+            </div>
+            <button class="mobile-nav-toggle">☰</button>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#programs">Programs</a></li>
+                <li><a href="#impact">Our Impact</a></li>
+                <li><a href="#stories">Stories</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#get-involved">Get Involved</a></li>
+                <li><a href="#donate" class="btn btn-primary">Donate</a></li>
             </ul>
-        </nav>
+        </div>
     </header>
 
-    <section id="hero">
-        <h1>Empowering Women, Transforming Communities</h1>
-        <p>Join us in creating a world where every woman is Beautiful, Strong, and Amazing.</p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Empowering Women Worldwide</h1>
+            <p>Supporting grassroots organizations led by women to create sustainable change in the workplace across the globe.</p>
+            <a href="#donate" class="btn btn-primary">Make a Donation</a>
+            <a href="#get-involved" class="btn btn-outline">Learn More</a>
+        </div>
     </section>
 
-    <section id="career-growth">
-        <h2>Promoting Career Growth</h2>
-        <p>We provide resources, mentorship, and training to help women excel in their careers.</p>
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container about-content">
+            <div>
+                <h2 class="section-title">Our Mission</h2>
+                <h3 class="section-subtitle">Mobilizing resources for women-led initiatives</h3>
+                <p>Beautiful, Strong, Amazing is dedicated to advancing women's rights and gender equality through targeted funding and support for grassroots organizations led by women. We believe that investing in women is key to creating sustainable social change.</p>
+                <p>Founded in 2025, we are partnering with over 150 women-led groups across 45 countries, focusing on economic empowerment, education, health, leadership, and ending prejudice and bias against women in the workplace.</p>
+                <a href="#" class="btn btn-primary">Learn Our Story</a>
+            </div>
+            <div>
+                <img src="/img/stylish business attire.webp" alt="Women leaders meeting" style="width: 100%; border-radius: 10px;">
+            </div>
+        </div>
     </section>
 
-    <section id="sexual-harassment">
-        <h2>Sexual Harassment in the Workplace</h2>
-        <p>Learn about your rights, how to report incidents, and how we support victims.</p>
+    <!-- Programs Section -->
+    <section id="programs" class="programs">
+        <div class="container">
+            <div class="programs-intro">
+                <h2 class="section-title">Our Programs</h2>
+                <p>We support women-led initiatives across five key focus areas that create sustainable change in communities.</p>
+            </div>
+            <div class="programs-grid">
+                <!-- Program Card 1 -->
+                <div class="program-card">
+                    <div class="program-img" style="background: url('/img/Collaboration.webp') center/cover;"></div>
+                    <div class="program-content">
+                        <h3>Economic Empowerment</h3>
+                        <p>Supporting women entrepreneurs, cooperatives, and skill-building initiatives to increase financial independence.</p>
+                        <a href="#" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Program Card 2 -->
+                <div class="program-card">
+                    <div class="program-img" style="background: url('/img/Discussion.webp') center/cover;"></div>
+                    <div class="program-content">
+                        <h3>Education Access</h3>
+                        <p>Breaking barriers to education for girls and women through scholarships, safe schools, and adult literacy programs.</p>
+                        <a href="#" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Program Card 3 -->
+                <div class="program-card">
+                    <div class="program-img" style="background: url('/img/Learning\ in\ circle.webp') center/cover;"></div>
+                    <div class="program-content">
+                        <h3>Health & Wellbeing</h3>
+                        <p>Improving access to healthcare services, reproductive health education, and mental health support.</p>
+                        <a href="#" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="merchandise">
-        <h2>Our Merchandise</h2>
-        <p>Shop our exclusive BSA merchandise to support our cause.</p>
-        <button>Shop Now</button>
+    <!-- Impact Section -->
+    <section id="impact" class="impact">
+        <div class="container">
+            <h2 class="section-title">Our Impact</h2>
+            <p>Through our partners and programs, we've reached thousands of women and girls worldwide.</p>
+            
+            <div class="stats-container">
+                <div class="stat-box">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label">Organizations Funded</div>
+                </div>
+                
+                <div class="stat-box">
+                    <div class="stat-number">45</div>
+                    <div class="stat-label">Countries Reached</div>
+                </div>
+                
+                <div class="stat-box">
+                    <div class="stat-number">75,000+</div>
+                    <div class="stat-label">Women & Girls Impacted</div>
+                </div>
+            </div>
+            
+            <a href="#" class="btn btn-primary">View Impact Report</a>
+        </div>
     </section>
 
-    <section id="events">
-        <h2>Workshops, Trainings, Retreats, and Dinners</h2>
-        <p>Join our events to connect, learn, and grow.</p>
-        <button>View Events</button>
+    <!-- Stories Section -->
+    <section id="stories" class="stories">
+        <div class="container">
+            <div class="stories-intro">
+                <h2 class="section-title">Stories of Change</h2>
+                <p>Hear from the women whose lives have been transformed through our programs.</p>
+            </div>
+            
+            <div class="story-slider">
+                <div class="story-card">
+                    <p class="story-quote">"The cooperative has changed everything for me. I went from struggling to feed my children to being able to pay for their education and even start saving for the future."</p>
+                    <div class="story-author">
+                        <div class="author-img" style="background: url('/img/stylish\ business\ attire.webp') center/cover;"></div>
+                        <div>
+                            <strong>Anonymous</strong>
+                            <p>Cooperative Member, Kenya</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="donate">
-        <h2>Support Our Mission</h2>
-        <p>Your donations help us empower women and transform communities. Every contribution makes a difference.</p>
-        <form>
-            <button type="button" onclick="window.location.href='https://www.paypal.com'">PayPal</button>
-            <button type="button" onclick="window.location.href='https://www.visa.com'">Visa</button>
-            <button type="button" onclick="window.location.href='https://www.mpesa.com'">M-Pesa</button>
-        </form>
+    <!-- Get Involved Section -->
+    <section id="get-involved" class="get-involved">
+        <div class="container">
+            <div class="get-involved-intro">
+                <h2 class="section-title">Get Involved</h2>
+                <p>Join our global community working to advance women's rights and create lasting change.</p>
+            </div>
+            
+            <div class="involvement-options">
+                <div class="involvement-card">
+                    <div class="involvement-icon">💰</div>
+                    <h3>Donate</h3>
+                    <p>Your contribution directly supports women-led organizations working for change.</p>
+                    <a href="#donate" class="btn btn-outline">Make a Gift</a>
+                </div>
+                
+                <div class="involvement-card">
+                    <div class="involvement-icon">🤝</div>
+                    <h3>Partner</h3>
+                    <p>Explore corporate partnerships, foundation funding, or institutional collaborations.</p>
+                    <a href="#" class="btn btn-outline">Partner With Us</a>
+                </div>
+                
+                <div class="involvement-card">
+                    <div class="involvement-icon">📣</div>
+                    <h3>Advocate</h3>
+                    <p>Use your voice to raise awareness about issues affecting women globally.</p>
+                    <a href="#" class="btn btn-outline">Take Action</a>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="success-stories">
-        <h2>Success Stories</h2>
-        <p>Read inspiring stories from women who have benefited from our programs.</p>
-        <button>Read More</button>
+    <!-- Donation Section -->
+    <section id="donate" class="donate">
+        <div class="container">
+            <h2>Make a Difference Today</h2>
+            <p>Your donation helps fund grassroots solutions created by women, for women. Every contribution, no matter the size, makes an impact.</p>
+            
+            <div class="donation-buttons">
+                <button class="donation-amount">$25</button>
+                <button class="donation-amount active">$50</button>
+                <button class="donation-amount">$100</button>
+                <button class="donation-amount">$250</button>
+                <button class="donation-amount">Other</button>
+            </div>
+            
+            <form class="donation-form">
+                <div class="form-group">
+                    <label for="donation-type">Donation Type</label>
+                    <select id="donation-type">
+                        <option>One-time Donation</option>
+                        <option>Monthly Donation</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="full-name">Full Name</label>
+                    <input type="text" id="full-name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email">
+                </div>
+                
+                <button class="btn btn-outline">Complete Donation</button>
+            </form>
+        </div>
     </section>
 
-    <section id="report-incident">
-        <h2>Report an Incident</h2>
-        <form>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="incident">Describe the Incident:</label>
-            <textarea id="incident" name="incident" rows="5" required></textarea>
-            <button type="submit">Submit</button>
-        </form>
-    </section>
-
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2025 BSA - Beautiful, Strong, Amazing. All rights reserved.</p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Beautiful, Strong, Amazing </h3>
+                    <p>Supporting women-led change around the world since 2025.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon">f</a>
+                        <a href="#" class="social-icon">t</a>
+                        <a href="#" class="social-icon">i</a>
+                        <a href="#" class="social-icon">y</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#programs">Our Programs</a></li>
+                        <li><a href="#impact">Impact</a></li>
+                        <li><a href="#stories">Success Stories</a></li>
+                        <li><a href="#get-involved">Get Involved</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Annual Reports</a></li>
+                        <li><a href="#">Financial Statements</a></li>
+                        <li><a href="#">News & Updates</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Press Kit</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <p>123 BSA Ave<br>Nairobi, 10001</p>
+                    <p>info@beautifulstrongamazing.org<br>+254700000000</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Beautiful, Strong, Amazing . All rights reserved.</p>
+            </div>
+        </div>
     </footer>
+
+    <script>
+        // Mobile navigation toggle
+        document.querySelector('.mobile-nav-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking a nav link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+        
+        // Donation amount selection
+        document.querySelectorAll('.donation-amount').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.donation-amount').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const target = document.querySelector(targetId);
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
+
