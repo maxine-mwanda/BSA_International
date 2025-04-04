@@ -22,7 +22,7 @@ var paypalClient *paypal.Client
 
 func main() {
 	// Initialize MySQL database
-	dsn := os.Getenv("DB_CONNECTION")
+	/*dsn := os.Getenv("DB_CONNECTION")
 	var err error
 	db, err = sql.Open("mysql", dsn) // Assigning to global 'db'
 	if err != nil {
@@ -30,9 +30,10 @@ func main() {
 	}
 	if err := db.Ping(); err != nil {
 		log.Fatalf("Database unreachable: %v", err)
-	}
+	}*/
 
 	// Initialize PayPal client
+	var err error
 	paypalClient, err = paypal.NewClient("clientID", "secretID", paypal.APIBaseSandBox)
 	if err != nil {
 		log.Fatalf("PayPal initialization failed: %v", err)
