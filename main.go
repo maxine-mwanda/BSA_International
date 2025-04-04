@@ -23,31 +23,41 @@ var paypalClient *paypal.Client
 func main() {
 	// Initialize MySQL database
 	dsn := os.Getenv("DB_CONNECTION")
-	db, err := sql.Open("mysql", dsn)
+	var err error
+	db, err = sql.Open("mysql", dsn) // Assigning to global 'db'
 	if err != nil {
-		return
+		log.Fatalf("Database connection error: %v", err)
 	}
 	if err := db.Ping(); err != nil {
-		return
+		log.Fatalf("Database unreachable: %v", err)
 	}
 
 	// Initialize PayPal client
 	paypalClient, err = paypal.NewClient("clientID", "secretID", paypal.APIBaseSandBox)
 	if err != nil {
-		log.Fatalln(err)
+		log.Fatalf("PayPal initialization failed: %v", err)
 	}
 
 	// Initialize Stripe
 	stripe.Key = "YOUR_STRIPE_SECRET_KEY"
 
+	// Setup router
 	r := mux.NewRouter()
-
 	r.HandleFunc("/", homeHandler).Methods("GET")
 	r.HandleFunc("/donate", donateHandler).Methods("POST")
 	r.HandleFunc("/report", reportHandler).Methods("POST")
 
-	fmt.Println("Server started at :8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	// Serve static files (important for CSS, images, etc.)
+	r.PathPrefix("/templates/").Handler(http.StripPrefix("/templates/", http.FileServer(http.Dir("templates"))))
+
+	// Get and validate port from environment
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080" // Default to 8080 if PORT is not set
+	}
+
+	fmt.Printf("🚀 Server started at port %s\n", port)
+	log.Fatal(http.ListenAndServe("0.0.0.0:"+port, r)) // Bind router
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
@@ -59,13 +69,12 @@ func donateHandler(w http.ResponseWriter, r *http.Request) {
 	amount := r.FormValue("amount")
 	paymentMethod := r.FormValue("payment_method")
 
-	// Validate minimum donation amount
 	if amount < "1" {
 		http.Error(w, "Minimum donation amount is $1", http.StatusBadRequest)
 		return
 	}
 
-	// Process payment based on the selected method
+	// Process payment
 	switch paymentMethod {
 	case "Visa":
 		err := processStripePayment(amount)
@@ -90,7 +99,7 @@ func donateHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Save donation to the database
+	// Save donation
 	_, err := db.Exec("INSERT INTO donations (amount, payment_method) VALUES (?, ?)", amount, paymentMethod)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -101,7 +110,6 @@ func donateHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func processStripePayment(amount string) error {
-	// Convert amount to cents (Stripe requires amount in smallest currency unit)
 	amountFloat, err := strconv.ParseFloat(amount, 64)
 	if err != nil {
 		return fmt.Errorf("invalid amount: %v", err)
@@ -118,7 +126,6 @@ func processStripePayment(amount string) error {
 }
 
 func createPayPalDonation(amount string) (string, error) {
-	// Create the payment
 	ctx := context.Background()
 	purchaseUnits := []paypal.PurchaseUnitRequest{
 		{
@@ -134,19 +141,15 @@ func createPayPalDonation(amount string) (string, error) {
 		return "", err
 	}
 
-	// Get the approval URL
 	for _, link := range createdOrder.Links {
 		if link.Rel == "approve" {
 			return link.Href, nil
 		}
 	}
-
 	return "", fmt.Errorf("no approval URL found")
 }
 
 func processMPesaPayment(amount string) error {
-	// Implement M-Pesa API call here
-	// Use Safaricom's API to initiate a payment request
 	return nil
 }
 
