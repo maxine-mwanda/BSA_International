@@ -1,0 +1,27 @@
+# Database Configuration
+DB_CONNECTION=
+DB_NAME=
+DB_USER=
+DB_PASSWORD=
+DB_ROOT_PASSWORD=
+
+# Redis Configuration
+REDIS_ADDR=
+REDIS_PASSWORD=
+REDIS_DB=
+
+# Email Configuration
+EMAIL_FROM=
+SMTP_HOST=
+SMTP_USER=
+SMTP_PASS=
+
+# Logging Configuration
+LOG_LEVEL=debug
+
+# Payment Gateway Configuration
+PAYPAL_CLIENT_ID=
+PAYPAL_SECRET=
+VISA_API_KEY=
+MPESA_CONSUMER_KEY=
+MPESA_CONSUMER_SECRET=
